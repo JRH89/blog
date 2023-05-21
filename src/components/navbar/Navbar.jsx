@@ -14,7 +14,7 @@ const Navbar = () => {
 
   const handleHideDropdown = () => setShowDropdown(prev => false)
 
-  const loggedIn = true
+  const loggedIn = false
   return (
     <div className={classes.container}>
         <div className={classes.wrapper}>
@@ -36,7 +36,12 @@ const Navbar = () => {
                   )}
                 </div>
                 )
-                : (<h2>fhjuarn</h2>)
+              : (
+                <>
+                  <button className={classes.login}>Log In</button>
+                  <Link href='/register'>Register</Link>
+                </>
+              )
                 }
               </ul>
         </div>
