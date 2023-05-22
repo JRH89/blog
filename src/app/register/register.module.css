@@ -2,7 +2,6 @@
 	margin-top: 5rem;
 	height: calc(100vh - 60px);
 	width: 100%;
-	
 }
 
 .wrapper {
@@ -58,7 +57,7 @@
 	color: #efefef;
 }
 
-.loginNow {
+.registerNow {
 	background-color: transparent;
 	outline: none;
 	border: none;
@@ -69,6 +68,6 @@
 	transition: 150ms;
 }
 
-.loginNow:hover {
+.registerNow:hover {
 	color: #555;
 }

@@ -25,7 +25,7 @@ const Navbar = () => {
             </h2>
             <ul className={classes.right}>
                 {
-                loggedIn
+                session?.user
                 ? (
                 <div>
                   <Image onClick={handleShowDropdown} src={person} width={45} height={45}/>
