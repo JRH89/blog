@@ -161,10 +161,10 @@ export default function BlogPage({ params }) {
               </ul>
 
             </details>
-
+            <BannerAdOne />
           </div>
-          <BannerAdOne />
           <RenderMdx blog={blog} />
+
         </div>
       </article>
     </>
