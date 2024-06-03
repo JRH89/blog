@@ -17,12 +17,7 @@ const BannerAdOne = () => {
 		}
 	}, [])
 
-	useEffect(() => {
-		// Push ad to display
-		if (window.adsbygoogle) {
-			window.adsbygoogle.push({})
-		}
-	}, [])
+
 
 	return (
 		<ins
