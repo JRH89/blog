@@ -1,22 +1,22 @@
-import "./globals.css";
-import { cx } from "@/src/utils";
-import { Inter, Manrope } from "next/font/google";
-import Header from "@/src/components/Header";
-import Footer from "../components/Footer";
-import siteMetadata from "../utils/siteMetaData";
-import Script from "next/script";
+import "./globals.css"
+import { cx } from "@/src/utils"
+import { Inter, Manrope } from "next/font/google"
+import Header from "@/src/components/Header"
+import Footer from "../components/Footer"
+import siteMetadata from "../utils/siteMetaData"
+import Script from "next/script"
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-in",
-});
+})
 
 const manrope = Manrope({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-mr",
-});
+})
 
 export const metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -51,11 +51,14 @@ export const metadata = {
     title: siteMetadata.title,
     images: [siteMetadata.socialBanner],
   },
-};
+}
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <meta name="google-site-verification" content="94IN99LAWmrXJfd0QuFFwdRCGEGyEep99Cx0-GGRiPQ" />
+      </head>
       <body
         className={cx(
           inter.variable,
@@ -75,5 +78,5 @@ export default function RootLayout({ children }) {
         <Footer />
       </body>
     </html>
-  );
+  )
 }
