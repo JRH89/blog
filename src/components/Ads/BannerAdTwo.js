@@ -1,28 +1,52 @@
-import React, { useEffect } from 'react'
+'use client'
+
+import React, { useEffect, useState } from 'react'
 
 const BannerAdTwo = () => {
+	const [isVisible, setIsVisible] = useState(false)
+
 	useEffect(() => {
 		// Load the adsbygoogle script
 		const script = document.createElement('script')
 		script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js'
 		script.async = true
 		script.setAttribute('data-ad-client', 'ca-pub-9106810782791939')
-		document.head.appendChild(script);
+		document.head.appendChild(script)
 
-		// Push the ad when the component mounts
-		(window.adsbygoogle = window.adsbygoogle || []).push({})
+		// Push the ad when the script is loaded
+		script.onload = () => {
+			(window.adsbygoogle = window.adsbygoogle || []).push({})
+		}
 
-		// Clean up script on component unmount
+		// Handle scroll behavior
+		const handleScroll = () => {
+			if (window.scrollY > 100) {
+				setIsVisible(true)
+			} else {
+				setIsVisible(false)
+			}
+		}
+
+		window.addEventListener('scroll', handleScroll)
+
+		// Clean up script and scroll event listener on component unmount
 		return () => {
 			document.head.removeChild(script)
+			window.removeEventListener('scroll', handleScroll)
 		}
 	}, [])
 
 	return (
-		<ins className="adsbygoogle"
-			style={{ display: 'inline-block', width: '728px', height: '90px' }}
-			data-ad-client="ca-pub-9106810782791939"
-			data-ad-slot="8899916620"></ins>
+		<div className='w-full h-[90px]'>
+			<div className={`fixed bottom-0 w-full flex justify-center bg-black/80 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ height: '90px' }}>
+
+				<ins className="adsbygoogle"
+					style={{ display: 'inline-block', width: '728px', height: '90px' }}
+					data-ad-client="ca-pub-9106810782791939"
+					data-ad-slot="8899916620"></ins>
+			</div>
+		</div>
+
 	)
 }
 
