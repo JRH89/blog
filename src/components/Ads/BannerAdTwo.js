@@ -37,12 +37,14 @@ const BannerAdTwo = () => {
 	}, [])
 
 	return (
-		<div className={`fixed bottom-0 w-full flex justify-center bg-black/80 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`} style={{ height: '90px' }}>
-			<div className="w-[728px] h-[90px] flex items-center justify-center overflow-hidden">
-				<ins className="adsbygoogle"
-					style={{ display: 'block', width: '728px', height: '90px' }}
-					data-ad-client="ca-pub-9106810782791939"
-					data-ad-slot="8899916620"></ins>
+		<div className={`fixed bottom-0 w-full flex justify-center bg-black/80 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+			<div className="w-full max-w-[728px] h-[90px] flex items-center justify-center">
+				<div className="relative w-full h-0 pb-[12.36%]"> {/* Aspect ratio container */}
+					<ins className="adsbygoogle absolute inset-0 w-full h-full"
+						style={{ display: 'inline-block' }}
+						data-ad-client="ca-pub-9106810782791939"
+						data-ad-slot="8899916620"></ins>
+				</div>
 			</div>
 		</div>
 	)
