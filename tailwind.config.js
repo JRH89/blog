@@ -11,24 +11,24 @@ module.exports = {
       colors: {
         dark: "#1b1b1b",
         light: "#fff",
-        accent: "#7B00D3",
-        accentDark: "#ffdb4d",
+        accent: "#7F00FF",
+        accentDark: "#98FB98",
         gray: "#747474",
       },
-      fontFamily:{
+      fontFamily: {
         mr: ["var(--font-mr)"],
         in: ["var(--font-in)"]
       },
-      animation:{
+      animation: {
         roll: "roll 24s linear infinite"
       },
-      keyframes:{
-        roll:{
-          "0%": {transform: "translateX(100%)"},
-          "100%": {transform: "translateX(-100%)"}
+      keyframes: {
+        roll: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(-100%)" }
         }
       },
-      screens:{
+      screens: {
         sxl: "1180px",
         // @media (min-width: 1180px){...}
         xs: "480px"
@@ -40,4 +40,4 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
   ],
-};
+}
