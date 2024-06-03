@@ -159,8 +159,9 @@ export default function BlogPage({ params }) {
                   )
                 })}
               </ul>
+              <BannerAdOne />
             </details>
-            <BannerAdOne />
+
           </div>
           <RenderMdx blog={blog} />
         </div>
