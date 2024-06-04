@@ -12,6 +12,7 @@
   "dependencies": {
     "@dotlottie/react-player": "^1.2.1",
     "@firebase/auth": "^1.3.0",
+    "@sendgrid/mail": "^8.1.3",
     "@supabase/auth-helpers-nextjs": "^0.7.4",
     "@tailwindcss/forms": "^0.5.5",
     "@tailwindcss/typography": "^0.5.9",
@@ -42,5 +43,10 @@
   "devDependencies": {
     "encoding": "^0.1.13",
     "sharp": "^0.32.6"
+  },
+   "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }
