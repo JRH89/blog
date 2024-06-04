@@ -66,16 +66,17 @@ const Footer = () => {
             onChange={handleInputChange}
             className="w-full bg-transparent pl-2 sm:pl-0 text-dark dark:text-light focus:border-dark focus:ring-0 border-0 border-b mr-2 pb-1"
           />
-          <ReCAPTCHA
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} // Use your reCAPTCHA site key
-            onChange={handleCaptchaChange}
-            className="mt-2 mb-2"
-          />
+
           <input
             type="submit"
             className="bg-dark text-light dark:text-dark dark:bg-light cursor-pointer font-medium rounded px-3 sm:px-5 py-1"
           />
         </form>
+        <ReCAPTCHA
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} // Use your reCAPTCHA site key
+          onChange={handleCaptchaChange}
+          className="mt-2 mb-2"
+        />
         {error && <p className="text-red-500">{error}</p>}
         {success && <p className="text-white font-bold">Email submitted successfully!</p>}
         <div className="flex items-center mt-8">
