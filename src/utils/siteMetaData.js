@@ -1,9 +1,9 @@
 // please update required information
 const siteMetadata = {
-  title: 'Blog',
+  title: "Jared Hooker's Blog",
   author: 'Jared Hooker',
-  headerTitle: 'Blog',
-  description: 'A blog created with Next.js, Tailwind.css, supabase, and contentlayer.',
+  headerTitle: "Jared Hooker's Blog",
+  description: 'A blog focusing on web development and architectural visualization.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://blog.hookerhillstudios.com', // your website URL

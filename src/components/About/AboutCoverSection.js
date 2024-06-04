@@ -18,7 +18,7 @@ const AboutCoverSection = () => {
           Empowering Imagination, Engineering Innovation: Solutions for All Frontiers
         </h2>
         <p className='font-medium  mt-4 text-base'>
-          I am a software developer with a strong focus on web and mobile app development. I specialize in JavaScript, React, Next.js, Tailwind CSS, Firebase, and Vercel for building robust and responsive web applications. On the mobile front, I work with Java, Android Studio, and Firebase, including AdMob integration for monetization. Additionally, I&#x27;m well-versed in Python, C#, and C++ for diverse projects like game development and creating cross-platform desktop applications with intuitive graphical user interfaces.
+          I am a software developer with a strong focus on web and mobile app development. I specialize in JavaScript, React, Next.js, Tailwind CSS, Firebase, and Vercel for building robust and responsive web applications.
         </p>
       </div>
     </section>
