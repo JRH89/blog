@@ -58,6 +58,17 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="google-site-verification" content="94IN99LAWmrXJfd0QuFFwdRCGEGyEep99Cx0-GGRiPQ" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-7MTT3S84F1"></script>
+        <script>
+          dangerouslySetInnerHTML={{
+            __html: ` window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-7MTT3S84F1');`,
+          }}
+
+        </script>
       </head>
       <body
         className={cx(
