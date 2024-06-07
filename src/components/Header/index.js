@@ -19,7 +19,7 @@ const Header = () => {
     <header className="w-full p-4  px-5 sm:px-10 flex items-center justify-between">
       <Logo />
 
-      <button className="inline-block sm:hidden z-50" onClick={toggle} aria-label="Hamburger Menu">
+      <button className="inline-block sm:hidden z-50 mr-3" onClick={toggle} aria-label="Hamburger Menu">
         <div className="w-6 cursor-pointer transition-all ease duration-300">
           <div className="relative">
             <span className="absolute top-0 inline-block w-full h-0.5 bg-dark dark:bg-light rounded transition-all ease duration-200"
