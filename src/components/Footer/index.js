@@ -41,6 +41,7 @@ const Footer = () => {
       const docRef = await addDoc(collection(db, "blogEmails"), {
         email,
         timestamp: Timestamp.fromDate(new Date()), // Use Timestamp to store the current date and time
+        subscribed: true,
       })
 
       setSuccess(true)
