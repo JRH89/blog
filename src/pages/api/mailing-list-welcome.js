@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     sgMail.setApiKey("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");
 
     const msg = {
-      to: "hookerhillstudios@gmail.com", // Change to your email address
+      to: recipient, // Change to your email address
       from: "hookerhillstudios@gmail.com", // Change to your email address
       subject: "Welcome to my Blog",
       html: `
