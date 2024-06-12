@@ -13,7 +13,7 @@ const unsubscribeUser = async () => {
 			const email = url.split('=')[1] // Extract email after the '=' sign
 
 			// Query the Firestore collection to find the document with the matching email
-			const q = query(collection(db, 'blog'), where('email', '==', email))
+			const q = query(collection(db, 'blogEmails'), where('email', '==', email))
 			const querySnapshot = await getDocs(q)
 
 			// Loop through the matching documents (should be just one)

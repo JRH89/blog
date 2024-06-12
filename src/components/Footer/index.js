@@ -45,45 +45,48 @@ const Footer = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError(null)
-    setSuccess(false)
-
+    e.preventDefault();
+    setError(null);
+    setSuccess(false);
+  
     if (!email) {
-      setError("Email is required.")
-      return
+      setError("Email is required.");
+      return;
     }
-
+  
     if (!captchaValue) {
-      setError("Please complete the reCAPTCHA.")
-      return
+      setError("Please complete the reCAPTCHA.");
+      return;
     }
-
+  
     const data = {
-      email: email,
+      email: email, // Include the email in the data object
       captcha: captchaValue,
-    }
-
+    };
+  
     try {
+      // Add the email to your database
       const docRef = await addDoc(collection(db, "blogEmails"), {
-        email,
+        email: email,
         timestamp: Timestamp.fromDate(new Date()),
         subscribed: true,
-      })
-
-      const emailSent = await sendEmail(data)
-
+      });
+  
+      // Send the email with the provided data
+      const emailSent = await sendEmail(data);
+  
       if (emailSent) {
-        setSuccess(true)
-        setEmail("")
-        setCaptchaValue(null)
+        setSuccess(true);
+        setEmail("");
+        setCaptchaValue(null);
       } else {
-        setError("Error occurred while sending email.")
+        setError("Error occurred while sending email.");
       }
     } catch (error) {
-      setError("Error adding email. Please try again.")
+      setError("Error adding email. Please try again.");
     }
-  }
+  };
+  
 
   return (
     <div className="mb-[96px]">
