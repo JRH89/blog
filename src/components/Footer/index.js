@@ -5,7 +5,30 @@ import Link from "next/link"
 import siteMetadata from "@/src/utils/siteMetaData"
 import { db } from "@/firebase"
 import { collection, addDoc, Timestamp } from "firebase/firestore"
-import ReCAPTCHA from "react-google-recaptcha" // Import ReCAPTCHA
+import ReCAPTCHA from "react-google-recaptcha"
+
+async function sendEmail(data) {
+  try {
+    const response = await fetch("/api/mailing-list-welcome", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+    if (response.ok) {
+      console.log("Email sent successfully.")
+      return true
+    } else {
+      console.log("Error occurred while sending email.")
+      return false
+    }
+  } catch (error) {
+    console.error(error)
+    return false
+  }
+}
 
 const Footer = () => {
   const [email, setEmail] = useState("")
@@ -23,8 +46,8 @@ const Footer = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setError(null) // Reset error state
-    setSuccess(false) // Reset success state
+    setError(null)
+    setSuccess(false)
 
     if (!email) {
       setError("Email is required.")
@@ -36,40 +59,27 @@ const Footer = () => {
       return
     }
 
+    const data = {
+      email: email,
+      captcha: captchaValue,
+    }
+
     try {
-      // Add the email to the "blogEmails" collection in Firestore
       const docRef = await addDoc(collection(db, "blogEmails"), {
         email,
-        timestamp: Timestamp.fromDate(new Date()), // Use Timestamp to store the current date and time
+        timestamp: Timestamp.fromDate(new Date()),
         subscribed: true,
       })
 
-      async function sendEmail(data, captchaValue) {
-        try {
-          const response = await fetch("/api/mailing-list-welcome", {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-      
-          if (response.ok) {
-            console.log("Email sent successfully.")
-            return true
-          } else {
-            console.log("Error occurred while sending email.")
-            return false
-          }
-        } catch (error) {
-          console.error(error)
-          return false
-        }
-      }
+      const emailSent = await sendEmail(data)
 
-      setSuccess(true)
-      setEmail("")
-      setCaptchaValue(null) // Reset captcha
+      if (emailSent) {
+        setSuccess(true)
+        setEmail("")
+        setCaptchaValue(null)
+      } else {
+        setError("Error occurred while sending email.")
+      }
     } catch (error) {
       setError("Error adding email. Please try again.")
     }
@@ -90,14 +100,13 @@ const Footer = () => {
             onChange={handleInputChange}
             className="w-full bg-transparent pl-2 sm:pl-0 text-dark dark:text-light focus:border-dark focus:ring-0 border-0 border-b mr-2 pb-1"
           />
-
           <input
             type="submit"
             className="bg-dark text-light dark:text-dark dark:bg-light cursor-pointer font-medium rounded px-3 sm:px-5 py-1"
           />
         </form>
         <ReCAPTCHA
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} // Use your reCAPTCHA site key
+          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
           onChange={handleCaptchaChange}
           className="mt-2 mb-2"
         />
@@ -129,7 +138,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <GithubIcon className="fill-light dark:fill-dark  hover:scale-125 transition-all ease duration-200" />
+            <GithubIcon className="fill-light dark:fill-dark hover:scale-125 transition-all ease duration-200" />
           </a>
         </div>
         <div className="w-full mt-8 md:mt-24 relative font-medium border-t border-solid border-light py-6 px-8 flex flex-col md:flex-row items-center justify-between">
@@ -137,7 +146,7 @@ const Footer = () => {
           <div className="text-center">
             Powered by{" "}
             <a href="https://www.hookerhillstudios.com" className="underline" target="_blank">
-             Hooker Hill Studios
+              Hooker Hill Studios
             </a>
           </div>
         </div>
