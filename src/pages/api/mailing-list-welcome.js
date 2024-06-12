@@ -14,8 +14,9 @@ export default async function handler(req, res) {
       html: `
         <div style="max-width: 600px; margin: 0 auto; text-align: justify; color: black;">
           Thank you for subscribing to my blog. Click the link below if you would like to unsubscribe.
-        </div>
-        <p>If you wish to unsubscribe from future emails, please click <a href="https://blog.hookerhillstudios.com?email=${email}">here</a>.</p>
+       <p>If you wish to unsubscribe from future emails, please click <a href="https://blog.hookerhillstudios.com?email=${email}">here</a>.</p>
+          </div>
+        
       `,
     };
 
