@@ -44,6 +44,29 @@ const Footer = () => {
         subscribed: true,
       })
 
+      async function sendEmail(data, captchaValue) {
+        try {
+          const response = await fetch("/api/mailing-list-welcome", {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+      
+          if (response.ok) {
+            console.log("Email sent successfully.")
+            return true
+          } else {
+            console.log("Error occurred while sending email.")
+            return false
+          }
+        } catch (error) {
+          console.error(error)
+          return false
+        }
+      }
+
       setSuccess(true)
       setEmail("")
       setCaptchaValue(null) // Reset captcha
@@ -110,11 +133,11 @@ const Footer = () => {
           </a>
         </div>
         <div className="w-full mt-8 md:mt-24 relative font-medium border-t border-solid border-light py-6 px-8 flex flex-col md:flex-row items-center justify-between">
-          <span className="text-center">&copy;2023 Jared Hooker. All rights reserved.</span>
+          <span className="text-center">&copy;2023 Hooker Hill Studios. All rights reserved.</span>
           <div className="text-center">
-            Made by{" "}
+            Powered by{" "}
             <a href="https://www.hookerhillstudios.com" className="underline" target="_blank">
-              Jared Hooker
+             Hooker Hill Studios
             </a>
           </div>
         </div>
