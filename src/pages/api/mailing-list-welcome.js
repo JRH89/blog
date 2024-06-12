@@ -2,18 +2,14 @@ import sgMail from "@sendgrid/mail"
 
 export default async function handler(req, res) {
 	if (req.method === "POST") {
-		const { subject, message, email } = req.body
-
-		if (!subject || !message || !email) {
-			return res.status(400).json({ message: "Missing required fields" })
-		}
+		
 
 		sgMail.setApiKey("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")
 
 		const msg = {
 			to: "hookerhillstudios@gmail.com",
 			from: "hookerhillstudios@gmail.com",
-			subject: subject,
+			subject: "Welcome to my Blog",
             html: `<div style="max-width: 600px; margin: 0 auto; text-align: justify; color: black;">
             Thank you for subscribing to my blog. Click the link below if you would like to unsubscribe.
           </div>
