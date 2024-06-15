@@ -1,0 +1,323 @@
+---
+title: "Automating Image Compression and Resizing in Python: A Recursive Approach"
+description: "Automating image compression and resizing tasks can significantly optimize storage space and improve web performance."
+image: "../../public/blogs/recursion.png"
+publishedAt: "2024-06-15"
+updatedAt: "2024-06-15"
+author: "Jared Hooker"
+isPublished: true
+tags: 
+  - python
+---
+
+# Automating Image Compression and Resizing in Python: A Recursive Approach
+
+## Introduction
+
+Automating image compression and resizing tasks can significantly optimize storage space and improve web performance. This tutorial will guide you through creating a Python script to recursively compress and optionally resize images within a directory and its subdirectories using Pillow and os libraries.
+
+## Prerequisite
+
+Before you begin, ensure you have the following installed:
+
+- Python 3.x
+
+- Pillow (Python Imaging Library)
+
+You can install Pillow using pip:
+
+```bash
+pip install pillow
+```
+
+**Step 1: Setting Up the Project**
+
+Create a new directory for your project and navigate into it:
+
+```bash
+mkdir image_processing
+cd image_processing
+```
+
+## Step 2: Writing the Script
+
+**2.1 Importing Necessary Libraries**
+
+Start by importing the required libraries:
+
+```bash
+import os
+from PIL import Image
+```
+
+**2.2 Defining the Compression and Resizing Functions**
+
+Define functions to compress and optionally resize images:
+
+```python
+def compress_and_resize_image(input_path, output_path, quality=85, max_width=None, max_height=None):
+    with Image.open(input_path) as img:
+        if max_width or max_height:
+            img = resize_image(img, max_width, max_height)
+        img.save(output_path, "JPEG", quality=quality)
+
+def resize_image(img, max_width, max_height):
+    original_width, original_height = img.size
+    if max_width and max_height:
+        ratio = min(max_width/original_width, max_height/original_height)
+    elif max_width:
+        ratio = max_width / original_width
+    elif max_height:
+        ratio = max_height / original_height
+    else:
+        return img
+    
+    new_size = (int(original_width * ratio), int(original_height * ratio))
+    return img.resize(new_size, Image.ANTIALIAS)
+```
+
+**2.3 Recursive Directory Traversal**
+
+Write a function to recursively traverse directories and process images:
+
+```python
+def process_images_in_directory(directory, output_directory="output_images", quality=85, max_width=None, max_height=None):
+    if output_directory == "output_images":
+        output_directory = os.path.join(os.path.dirname(directory), "output_images")
+    
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
+    
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file.lower().endswith(('.png', '.jpg', '.jpeg')):
+                input_path = os.path.join(root, file)
+                relative_path = os.path.relpath(input_path, directory)
+                output_path = os.path.join(output_directory, relative_path)
+                output_dir = os.path.dirname(output_path)
+                
+                if not os.path.exists(output_dir):
+                    os.makedirs(output_dir)
+                
+                compress_and_resize_image(input_path, output_path, quality, max_width, max_height)
+                print(f"Processed: {input_path} -> {output_path}")
+```
+
+>Python is widely recognized for its versatility and ease of use. It is used in various fields, including web development, data analysis, artificial intelligence, and more. Its extensive standard library and the availability of numerous third-party libraries make it an excellent choice for automating tasks like image processing.
+>
+
+## Step 3: Executing the Script
+
+**3.1 Defining the Main Function**
+
+Create a main function to parse command-line arguments and execute the script:
+
+```python
+if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Compress and optionally resize images recursively in a directory.")
+    parser.add_argument("input_directory", help="The input directory containing images to process.")
+    parser.add_argument("--output_directory", help="The output directory to save processed images. Default is 'output_images'.", default="output_images")
+    parser.add_argument("--quality", type=int, default=85, help="Compression quality (default: 85).")
+    parser.add_argument("--max_width", type=int, help="Maximum width for resizing images (optional).")
+    parser.add_argument("--max_height", type=int, help="Maximum height for resizing images (optional).")
+
+    args = parser.parse_args()
+    
+    process_images_in_directory(args.input_directory, args.output_directory, args.quality, args.max_width, args.max_height)
+```
+
+## How It Works
+
+- **Compression and Resizing Functions:** The compress_and_resize_image function opens an image, optionally resizes it using resize_image based on specified dimensions (max_width and max_height), and saves it with the specified compression quality.
+
+- **Recursive Directory Traversal:** The process_images_in_directory function recursively traverses the specified input_directory, identifies image files (.png, .jpg, .jpeg), and processes each image by calling compress_and_resize_image. Processed images are saved in the output_directory while preserving the directory structure.
+
+## Running the Script
+
+**Step 4: Preparing Directories**
+
+Ensure you have an input directory containing images to process:
+
+```bash
+/path/to/input_directory/
+    ├── image1.jpg
+    ├── image2.png
+    └── subfolder/
+        └── image3.jpeg
+```
+
+**Step 5: Executing the Script**
+
+Run the script from the command line:
+
+```bash
+python compress_and_resize_images.py /path/to/input_directory --quality 75 --max_width 800 --max_height 600
+```
+
+- Replace /path/to/input_directory with the path to your input directory containing images.
+- Adjust --quality, --max_width, and --max_height as needed for your compression and resizing requirements.
+
+## Additional Information
+
+- **Choosing Compression Quality:** Adjust the --quality parameter to balance image quality and file size.
+
+- **Supported Formats:** The script supports common image formats such as PNG, JPG, and JPEG. Extend it to support other formats by modifying the file extension check in process_images_in_directory.
+
+>Pillow, the friendly fork of the Python Imaging Library (PIL), supports many image file formats and provides extensive functionality for opening, manipulating, and saving images. It includes powerful image processing tools such as filters, transformations, and enhancements, making it a comprehensive solution for image-related tasks.
+>
+
+## Completed Code:
+
+```python
+import os
+from PIL import Image
+
+def compress_and_resize_image(input_path, output_path, quality=85, max_width=None, max_height=None):
+    with Image.open(input_path) as img:
+        if max_width or max_height:
+            img = resize_image(img, max_width, max_height)
+        img.save(output_path, "JPEG", quality=quality)
+
+def resize_image(img, max_width, max_height):
+    original_width, original_height = img.size
+    if max_width and max_height:
+        ratio = min(max_width/original_width, max_height/original_height)
+    elif max_width:
+        ratio = max_width / original_width
+    elif max_height:
+        ratio = max_height / original_height
+    else:
+        return img
+    
+    new_size = (int(original_width * ratio), int(original_height * ratio))
+    return img.resize(new_size, Image.ANTIALIAS)
+
+def process_images_in_directory(directory, output_directory="output_images", quality=85, max_width=None, max_height=None):
+    if output_directory == "output_images":
+        output_directory = os.path.join(os.path.dirname(directory), "output_images")
+    
+    if not os.path.exists(output_directory):
+        os.makedirs(output_directory)
+    
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file.lower().endswith(('.png', '.jpg', '.jpeg')):
+                input_path = os.path.join(root, file)
+                relative_path = os.path.relpath(input_path, directory)
+                output_path = os.path.join(output_directory, relative_path)
+                output_dir = os.path.dirname(output_path)
+                
+                if not os.path.exists(output_dir):
+                    os.makedirs(output_dir)
+                
+                compress_and_resize_image(input_path, output_path, quality, max_width, max_height)
+                print(f"Processed: {input_path} -> {output_path}")
+
+if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Compress and optionally resize images recursively in a directory.")
+    parser.add_argument("input_directory", help="The input directory containing images to process.")
+    parser.add_argument("--output_directory", help="The output directory to save processed images. Default is 'output_images'.", default="output_images")
+    parser.add_argument("--quality", type=int, default=85, help="Compression quality (default: 85).")
+    parser.add_argument("--max_width", type=int, help="Maximum width for resizing images (optional).")
+    parser.add_argument("--max_height", type=int, help="Maximum height for resizing images (optional).")
+
+    args = parser.parse_args()
+    
+    process_images_in_directory(args.input_directory, args.output_directory, args.quality, args.max_width, args.max_height)
+```
+
+## Examples of Usage:
+
+**Example 1: Specifying Output Directory**
+
+```bash
+python compress_and_resize_images.py /path/to/input_directory --output_directory /path/to/output_directory --quality 75 --max_width 800 --max_height 600
+```
+
+**Explanation:**
+
+- `/path/to/input_directory`: Path to the directory containing the original images you want to process.
+- `--output_directory /path/to/output_directory:` Specifies where the processed images will be saved.
+- `--quality 75:` Sets the compression quality to 75 (adjust as needed).
+- `--max_width 800 --max_height 600:` Optionally resizes images to a maximum width of 800 pixels and a maximum height of 600 pixels.
+
+**Outcome:**
+
+- Processed images will be saved in `/path/to/output_directory`.
+
+- The directory structure from `/path/to/input_directory` will be replicated within `output_directory`.
+
+**Example 2: Using Default Output Directory**
+
+```bash
+python compress_and_resize_images.py /path/to/input_directory --quality 85 --max_width 1200
+```
+
+**Explanation:**
+
+- `/path/to/input_directory`: Path to the directory containing the original images.
+
+- `--quality 85`: Sets the compression quality to 85 (adjust as needed).
+
+- `--max_width 1200`: Optionally resizes images to a maximum width of 1200 pixels (adjust max_width and max_height as needed).
+
+**Outcome:**
+
+- Processed images will be saved in `output_images`, which will be created in the same directory as `/path/to/input_directory`.
+
+- The directory structure from `/path/to/input_directory` will be replicated within `output_image`s.
+
+## References
+
+- Pillow docs: https://pillow.readthedocs.io/en/stable/
+
+- os Library docs: https://docs.python.org/3/library/os.html
+
+> Python's os library provides a portable way to interact with the operating system. It includes functions for creating, removing, and navigating directories, as well as for querying and changing the system's environment. This makes it indispensable for writing scripts that need to perform file and directory operations, such as the recursive traversal implemented in this tutorial.
+>
+
+## Frequently Asked Questions (FAQ)
+
+### 1. How does the script determine where to save processed images?
+
+The script uses the `--output_directory` argument to specify where processed images should be saved. If you do not provide an `--output_directory`, it defaults to a directory named `output_images` created in the same location as your input directory.
+
+### 2. Can I specify different compression qualities for different images?
+
+Currently, the script applies the same compression quality (`--quality`) to all processed images. To apply different qualities, you would need to modify the script to handle different qualities based on image criteria or provide separate runs with different settings.
+
+### 3. How do I resize images while compressing them?
+
+You can resize images by specifying `--max_width` and/or `--max_height` arguments. If both are provided, the script will maintain aspect ratio and resize images to fit within the specified dimensions.
+
+### 4. What image formats does the script support?
+
+The script supports processing of `.png`, `.jpg`, and `.jpeg` image formats. It identifies these formats based on file extensions when traversing directories.
+
+### 5. How can I run the script on Windows/Linux/macOS?
+
+The script is designed to run on any platform where Python is installed. Use the command line to navigate to the directory containing the script (`compress_and_resize_images.py`) and execute it with appropriate arguments as shown in the examples.
+
+### 6. How can I handle large numbers of images efficiently?
+
+The script leverages Python's `os` module for efficient directory traversal and `Pillow` library for image processing, making it suitable for handling large volumes of images. Ensure sufficient system resources and consider running the script in batches if processing extremely large datasets.
+
+### 7. Can I integrate this script into my web application?
+
+Yes, you can integrate this script into web applications for automated image processing tasks. Ensure proper error handling and security measures, especially if allowing user-uploaded images.
+
+### 8. How do I customize the script for specific requirements?
+
+You can modify the script by adjusting parameters such as compression quality, resizing dimensions, or adding support for additional image formats. Refer to the Pillow documentation for more advanced usage and customization options.
+
+### 9. What if the output directory specified does not exist?
+
+If the specified `--output_directory` does not exist, the script will create it automatically before saving processed images. This ensures a seamless workflow without manual directory creation.
+
+# Conclusion
+
+By following this tutorial, you've created a Python script that automates the process of compressing and optionally resizing images within directories and subdirectories. This tool is invaluable for optimizing storage, improving web performance, and managing large collections of images efficiently.
