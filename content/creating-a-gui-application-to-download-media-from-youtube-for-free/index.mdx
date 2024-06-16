@@ -106,7 +106,6 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import yt_dlp
 
-# Function to download video as MP4
 def download_video(url, download_path):
     ydl_opts = {
         'outtmpl': os.path.join(download_path, '%(title)s.%(ext)s'),
@@ -115,7 +114,6 @@ def download_video(url, download_path):
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
 
-# Function to download and convert video to MP3
 def download_audio(url, download_path):
     ydl_opts = {
         'outtmpl': os.path.join(download_path, '%(title)s.%(ext)s'),
@@ -129,7 +127,6 @@ def download_audio(url, download_path):
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([url])
 
-# GUI setup
 def download():
     url = url_entry.get()
     download_path = filedialog.askdirectory()
@@ -205,13 +202,13 @@ Once you have created the yt_downloader.exe file using PyInstaller, you can shar
 
 These resources provide user-friendly interfaces for converting videos to various audio formats, including MP3.
 
-#### **Caveats and Recommendations**
+## Caveats and Recommendations
 
 - **Dependency on FFmpeg:** Although the yt_downloader.exe does not require FFmpeg to be installed separately on the user's system, the ability to extract MP3 directly from MP4 videos is limited to downloading directly as MP4 using yt-dlp.
 
 - **Sharing the Application:** When sharing yt_downloader.exe, ensure that recipients are aware of the limitations regarding downloading media. This will help manage expectations and guide users towards appropriate tools for any additional conversions they may need.
 
-### FAQ
+## FAQ
 
 **Do I need to install FFmpeg separately?**
 
@@ -229,7 +226,7 @@ Yes, you can customize the ydl_opts in the script to specify different formats.
 
 You can enhance the GUI to include more options, such as selecting video quality, downloading subtitles, etc., by modifying the ydl_opts in the script.
 
-### Final Code:
+## Final Code:
 
 ```python
 import os
@@ -290,13 +287,13 @@ app.mainloop()
 >FFmpeg's libraries, such as libavcodec, libavformat, and libavutil, are used by many software applications to handle multimedia content, including VLC media player, HandBrake, and many others.
 >
 
-# Useful Links and resources
+## Useful Links and resources
 
 - **yt-dlp:** For more information about yt-dlp, visit the official yt-dlp GitHub repository (https://github.com/yt-dlp/yt-dlp). This repository contains comprehensive documentation, installation instructions, and usage examples.
 
 - **Supported Sites:** A full list of supported sites whose URLs can be used with yt-dlp for downloading can be found here. This list includes a wide variety of video hosting and streaming platforms.
 
-# Discalimer
+## Discalimer
 
 This application is provided for entertainment and educational purposes only. I do not promote or condone the unauthorized downloading, distribution, or use of copyrighted content. Users of this application are responsible for ensuring that their use of the software complies with all applicable local, national, and international laws and regulations. Please respect the rights of content creators and adhere to the terms of service of the platforms from which you are downloading media. Use this tool responsibly.
 
