@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "contentlayer build && next dev",
-    "build": "contentlayer build && next build",
+    "clean": "rm -rf .contentlayer",
+    "dev": "npm run clean && contentlayer build && next dev",
+    "build": "npm run clean && contentlayer build && next build",
     "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint"
