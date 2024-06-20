@@ -37,6 +37,9 @@ C. **Install necessary packages:**
 npm install express @supabase/supabase-js dotenv
 ```
 
+> Express.js is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. It simplifies the process of building server-side applications by providing tools and libraries to handle routing, middleware, and HTTP requests.
+>
+
 ## **Step 2: Set Up Supabase**
 
 A. **Create a Supabase account and project:**
@@ -81,6 +84,9 @@ C. **Create a `dinosaur_facts` table in your Supabase project:**
         - Select the 'dinosaur_facts' table created ealier in this step (2-C). 
       
         - Click "Import data via CSV" and follow the on screen prompts to upload the 'dinosaurs.csv' dataset.
+
+>Supabase is an open-source Firebase alternative that provides backend services like authentication, real-time databases, and storage. It is built on top of PostgreSQL and offers features such as auto-generated APIs, user management, and real-time subscriptions.
+>
 
 ## **Step 3: Create the Express.js Application**
 
@@ -136,6 +142,9 @@ app.listen(port, () => {
 });
 ```
 
+>RESTful APIs are based on the principle of statelessness, meaning that each request from a client to a server must contain all the information needed to understand and process the request. The server does not store any state about the client session between requests, which simplifies scalability and improves performance.
+>
+
 ## **Step 4: Configure Environment Variables**
 
 A. **Create a .env file in your project directory:**
@@ -147,6 +156,9 @@ SUPABASE_KEY=your_supabase_key
 ```
 
 Replace your_supabase_url and your_supabase_key with your actual Supabase project URL and API key.
+
+>Express.js allows the use of middleware to handle requests, responses, and any other middleware logic in a flexible and modular way. Middleware functions can perform a variety of tasks like logging, authentication, data parsing, and error handling.
+>
 
 ## **Step 5: Testing the API**
 
@@ -211,6 +223,9 @@ The JSON response for this query might look like this:
     }
 ]
 ```
+
+>Supabase leverages PostgreSQL, a powerful, open-source relational database known for its robustness and scalability. This allows developers to use advanced SQL features and ensures compatibility with a wide range of tools and libraries.
+>
 
 ## **Explanation:**
 
