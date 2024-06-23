@@ -6,15 +6,14 @@ publishedAt: "2024-06-11"
 updatedAt: "2024-06-11"
 author: "Jared Hooker"
 isPublished: true
-tags: 
-  - web
+tags:
+  - web development
   - accessibility
 ---
 
 # The Importance of Accessibility in Web Development
 
->WCAG (Web Content Accessibility Guidelines) 2.1 has three levels of conformance: A, AA, and AAA.
->
+> WCAG (Web Content Accessibility Guidelines) 2.1 has three levels of conformance: A, AA, and AAA.
 
 ## Introduction
 
@@ -41,46 +40,46 @@ Semantic HTML elements provide meaning to the content, making it easier for scre
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accessible Web Page</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Welcome to Our Accessible Website</h1>
+      <h1>Welcome to Our Accessible Website</h1>
     </header>
     <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
     <main>
-        <section id="home">
-            <h2>Home</h2>
-            <p>Introduction to our website.</p>
-        </section>
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Learn more about our mission and values.</p>
-        </section>
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <form>
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                <button type="submit">Submit</button>
-            </form>
-        </section>
+      <section id="home">
+        <h2>Home</h2>
+        <p>Introduction to our website.</p>
+      </section>
+      <section id="about">
+        <h2>About Us</h2>
+        <p>Learn more about our mission and values.</p>
+      </section>
+      <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          <button type="submit">Submit</button>
+        </form>
+      </section>
     </main>
     <footer>
-        <p>&copy; 2024 Accessible Web</p>
+      <p>&copy; 2024 Accessible Web</p>
     </footer>
-</body>
+  </body>
 </html>
 ```
 
@@ -89,7 +88,7 @@ Semantic HTML elements provide meaning to the content, making it easier for scre
 All images, videos, and other non-text content should have appropriate text alternatives.
 
 ```html
-<img src="logo.png" alt="Company Logo">
+<img src="logo.png" alt="Company Logo" />
 ```
 
 ### **3. Ensure Keyboard Accessibility**
@@ -101,14 +100,14 @@ All interactive elements should be navigable using the keyboard.
 ```
 
 ```css
-button:focus, a:focus {
-    outline: 2px solid #005fcc;
-    outline-offset: 4px;
+button:focus,
+a:focus {
+  outline: 2px solid #005fcc;
+  outline-offset: 4px;
 }
 ```
 
->Screen readers are software programs that convert digital text into synthesized speech.
->
+> Screen readers are software programs that convert digital text into synthesized speech.
 
 ### 4. Use ARIA (Accessible Rich Internet Applications) Landmarks and Roles
 
@@ -116,11 +115,11 @@ ARIA roles help enhance the accessibility of dynamic content.
 
 ```html
 <div role="navigation">
-    <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </div>
 ```
 
@@ -130,20 +129,19 @@ Ensure sufficient color contrast between text and background, and provide option
 
 ```css
 body {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
-    background-color: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
 }
 
 .high-contrast {
-    color: #000;
-    background-color: #ff0;
+  color: #000;
+  background-color: #ff0;
 }
 ```
 
->Color blindness affects approximately 1 in 12 men and 1 in 200 women globally.
->
+> Color blindness affects approximately 1 in 12 men and 1 in 200 women globally.
 
 ## FAQ
 
@@ -169,7 +167,6 @@ Tools like WAVE, Axe, and Lighthouse can help test and audit your website for ac
 
 # Conclusion
 
->1 in 4 adults in the United States lives with a disability.
->
+> 1 in 4 adults in the United States lives with a disability.
 
 Web accessibility is not just a legal or ethical obligation—it's a commitment to creating an inclusive digital world where everyone can participate fully. By implementing accessibility features, developers can significantly enhance the user experience for all visitors, improve SEO, and expand their audience reach. Accessibility should be an integral part of the web development process, not an afterthought. By adopting best practices in HTML, CSS, and JavaScript, and leveraging tools and guidelines like WCAG, developers can ensure that their websites are usable and enjoyable for everyone, regardless of their abilities. Embracing accessibility is not just about compliance; it's about creating a web that works for everyone.

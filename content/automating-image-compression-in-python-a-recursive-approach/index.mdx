@@ -6,8 +6,9 @@ publishedAt: "2024-06-14"
 updatedAt: "2024-06-14"
 author: "Jared Hooker"
 isPublished: true
-tags: 
+tags:
   - python
+  - tutorial
 ---
 
 # Automating Image Compression and Resizing in Python: A Recursive Approach
@@ -71,7 +72,7 @@ def resize_image(img, max_width, max_height):
         ratio = max_height / original_height
     else:
         return img
-    
+
     new_size = (int(original_width * ratio), int(original_height * ratio))
     return img.resize(new_size, Image.ANTIALIAS)
 ```
@@ -84,10 +85,10 @@ Write a function to recursively traverse directories and process images:
 def process_images_in_directory(directory, output_directory="output_images", quality=85, max_width=None, max_height=None):
     if output_directory == "output_images":
         output_directory = os.path.join(os.path.dirname(directory), "output_images")
-    
+
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
-    
+
     for root, _, files in os.walk(directory):
         for file in files:
             if file.lower().endswith(('.png', '.jpg', '.jpeg')):
@@ -95,16 +96,15 @@ def process_images_in_directory(directory, output_directory="output_images", qua
                 relative_path = os.path.relpath(input_path, directory)
                 output_path = os.path.join(output_directory, relative_path)
                 output_dir = os.path.dirname(output_path)
-                
+
                 if not os.path.exists(output_dir):
                     os.makedirs(output_dir)
-                
+
                 compress_and_resize_image(input_path, output_path, quality, max_width, max_height)
                 print(f"Processed: {input_path} -> {output_path}")
 ```
 
->Python is widely recognized for its versatility and ease of use. It is used in various fields, including web development, data analysis, artificial intelligence, and more. Its extensive standard library and the availability of numerous third-party libraries make it an excellent choice for automating tasks like image processing.
->
+> Python is widely recognized for its versatility and ease of use. It is used in various fields, including web development, data analysis, artificial intelligence, and more. Its extensive standard library and the availability of numerous third-party libraries make it an excellent choice for automating tasks like image processing.
 
 ## Step 3: Executing the Script
 
@@ -115,7 +115,7 @@ Create a main function to parse command-line arguments and execute the script:
 ```python
 if __name__ == "__main__":
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="Compress and optionally resize images recursively in a directory.")
     parser.add_argument("input_directory", help="The input directory containing images to process.")
     parser.add_argument("--output_directory", help="The output directory to save processed images. Default is 'output_images'.", default="output_images")
@@ -124,7 +124,7 @@ if __name__ == "__main__":
     parser.add_argument("--max_height", type=int, help="Maximum height for resizing images (optional).")
 
     args = parser.parse_args()
-    
+
     process_images_in_directory(args.input_directory, args.output_directory, args.quality, args.max_width, args.max_height)
 ```
 
@@ -165,8 +165,7 @@ python compress_and_resize_images.py /path/to/input_directory --quality 75 --max
 
 - **Supported Formats:** The script supports common image formats such as PNG, JPG, and JPEG. Extend it to support other formats by modifying the file extension check in process_images_in_directory.
 
->Pillow, the friendly fork of the Python Imaging Library (PIL), supports many image file formats and provides extensive functionality for opening, manipulating, and saving images. It includes powerful image processing tools such as filters, transformations, and enhancements, making it a comprehensive solution for image-related tasks.
->
+> Pillow, the friendly fork of the Python Imaging Library (PIL), supports many image file formats and provides extensive functionality for opening, manipulating, and saving images. It includes powerful image processing tools such as filters, transformations, and enhancements, making it a comprehensive solution for image-related tasks.
 
 ## Completed Code:
 
@@ -190,17 +189,17 @@ def resize_image(img, max_width, max_height):
         ratio = max_height / original_height
     else:
         return img
-    
+
     new_size = (int(original_width * ratio), int(original_height * ratio))
     return img.resize(new_size, Image.ANTIALIAS)
 
 def process_images_in_directory(directory, output_directory="output_images", quality=85, max_width=None, max_height=None):
     if output_directory == "output_images":
         output_directory = os.path.join(os.path.dirname(directory), "output_images")
-    
+
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
-    
+
     for root, _, files in os.walk(directory):
         for file in files:
             if file.lower().endswith(('.png', '.jpg', '.jpeg')):
@@ -208,16 +207,16 @@ def process_images_in_directory(directory, output_directory="output_images", qua
                 relative_path = os.path.relpath(input_path, directory)
                 output_path = os.path.join(output_directory, relative_path)
                 output_dir = os.path.dirname(output_path)
-                
+
                 if not os.path.exists(output_dir):
                     os.makedirs(output_dir)
-                
+
                 compress_and_resize_image(input_path, output_path, quality, max_width, max_height)
                 print(f"Processed: {input_path} -> {output_path}")
 
 if __name__ == "__main__":
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="Compress and optionally resize images recursively in a directory.")
     parser.add_argument("input_directory", help="The input directory containing images to process.")
     parser.add_argument("--output_directory", help="The output directory to save processed images. Default is 'output_images'.", default="output_images")
@@ -226,7 +225,7 @@ if __name__ == "__main__":
     parser.add_argument("--max_height", type=int, help="Maximum height for resizing images (optional).")
 
     args = parser.parse_args()
-    
+
     process_images_in_directory(args.input_directory, args.output_directory, args.quality, args.max_width, args.max_height)
 ```
 
@@ -278,7 +277,6 @@ python compress_and_resize_images.py /path/to/input_directory --quality 85 --max
 - os Library docs: https://docs.python.org/3/library/os.html
 
 > Python's os library provides a portable way to interact with the operating system. It includes functions for creating, removing, and navigating directories, as well as for querying and changing the system's environment. This makes it indispensable for writing scripts that need to perform file and directory operations, such as the recursive traversal implemented in this tutorial.
->
 
 ## Frequently Asked Questions (FAQ)
 

@@ -6,8 +6,9 @@ publishedAt: "2024-06-13"
 updatedAt: "2024-06-13"
 author: "Jared Hooker"
 isPublished: true
-tags: 
+tags:
   - python
+  - tutorial
 ---
 
 # Deploying a Flask App to Google Cloud Run
@@ -187,10 +188,10 @@ If you haven't already installed the Google Cloud SDK:
 & $env:Temp\GoogleCloudSDKInstaller.exe
 ```
 
- After installation, initialize it with the following command:
+After installation, initialize it with the following command:
 
- ```Bash
- gcloud init
+```Bash
+gcloud init
 ```
 
 Follow the prompts to sign in and select the project you just created.
@@ -212,19 +213,18 @@ Make sure to replace [project-id] with your projects id and [region] with the re
 ```Bash
 gcloud run services delete [project-id] --region=[region]
 ```
-OR 
 
-Visit https://console.cloud.google.com/run and select the project you wish to delete. 
+OR
+
+Visit https://console.cloud.google.com/run and select the project you wish to delete.
 
 ## Need more help?
 
 If you are having issues successfully deploying your flask app to Google Cloud Run, feel free to download the complete files for this tutorial by clicking on the link below:
 
-<a style={{ color: 'skyblue' }} href="/downloads/hello-flask.zip" download>
+<a style={{ color: "skyblue" }} href="/downloads/hello-flask.zip" download>
   Download Complete Files
 </a>
-
-
 
 # Conclusion
 

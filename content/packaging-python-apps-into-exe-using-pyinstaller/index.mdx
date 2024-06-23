@@ -6,16 +6,16 @@ publishedAt: "2024-06-9"
 updatedAt: "2024-06-9"
 author: "Jared Hooker"
 isPublished: true
-tags: 
+tags:
   - python
+  - tutorial
 ---
 
 # Packaging Python Apps into .exe Using PyInstaller: A User-Friendly Guide
 
 Creating standalone executables from Python scripts can be essential for distributing your applications to users who do not have Python installed. PyInstaller is a popular tool for converting Python scripts into executable files (.exe). This guide will walk you through the process of using PyInstaller, including tips on common flags and customization options.
 
->Python was created by Guido van Rossum and was first released in 1991. Guido named the language after "Monty Python's Flying Circus," a British comedy series, which is why Python has a playful and approachable design philosophy. The language was designed to be easy to read and write, making it accessible to both beginners and experienced programmers.
->
+> Python was created by Guido van Rossum and was first released in 1991. Guido named the language after "Monty Python's Flying Circus," a British comedy series, which is why Python has a playful and approachable design philosophy. The language was designed to be easy to read and write, making it accessible to both beginners and experienced programmers.
 
 ## Getting Started with PyInstaller
 
@@ -71,8 +71,7 @@ If your application is a GUI and you want to prevent the command prompt from pop
 pyinstaller --onefile --noconsole your_script.py
 ```
 
->Python is a highly versatile programming language used in a wide range of fields, from web development and data analysis to artificial intelligence and scientific computing. Libraries like Django and Flask make it popular for web development, while Pandas, NumPy, and SciPy are widely used in data science. Additionally, TensorFlow and PyTorch have made Python a leading language in machine learning and AI.
->
+> Python is a highly versatile programming language used in a wide range of fields, from web development and data analysis to artificial intelligence and scientific computing. Libraries like Django and Flask make it popular for web development, while Pandas, NumPy, and SciPy are widely used in data science. Additionally, TensorFlow and PyTorch have made Python a leading language in machine learning and AI.
 
 ### Adding a Splash Screen
 
@@ -184,8 +183,7 @@ Ensure all dependencies are included and compatible with the target system. Miss
 
 You can enable debug mode by setting the debug parameter in the spec file to True or using the --debug flag when running PyInstaller.
 
->Unlike many other programming languages, Python uses indentation to define code blocks instead of curly braces or keywords. This reliance on indentation (whitespace) promotes readability and enforces a clean, consistent coding style. While this can be surprising to new programmers, it helps maintain a visually uncluttered structure and reduces the likelihood of errors related to code block delimiters.
->
+> Unlike many other programming languages, Python uses indentation to define code blocks instead of curly braces or keywords. This reliance on indentation (whitespace) promotes readability and enforces a clean, consistent coding style. While this can be surprising to new programmers, it helps maintain a visually uncluttered structure and reduces the likelihood of errors related to code block delimiters.
 
 # Conclusion
 
