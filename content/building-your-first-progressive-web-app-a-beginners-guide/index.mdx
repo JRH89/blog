@@ -6,8 +6,9 @@ publishedAt: "2024-06-9"
 updatedAt: "2024-06-9"
 author: "Jared Hooker"
 isPublished: true
-tags: 
+tags:
   - PWA
+  - tutorial
 ---
 
 # Building Your First Progressive Web App: A Beginner's Guide
@@ -16,14 +17,13 @@ tags:
 
 Progressive Web Apps (PWAs) combine the best of web and mobile apps. They offer the reliability and engagement of a native app but are built using web technologies. In this guide, you'll learn the essential steps to create your first PWA, complete with code examples and best practices.
 
->**Offline Capabilities:** PWAs can work offline or in low network conditions using service workers.
->
+> **Offline Capabilities:** PWAs can work offline or in low network conditions using service workers.
 
 ## What is a Progressive Web App?
 
 A PWA is a web application that uses modern web capabilities to deliver an app-like experience to users. Key characteristics of PWAs include:
 
-1. **Reliable:**  Loads instantly and reliably, even on flaky networks.
+1. **Reliable:** Loads instantly and reliably, even on flaky networks.
 2. **Fast:** Responds quickly to user interactions with smooth animations.
 3. **Engaging:** Feels like a natural app on the device with an immersive user experience.
 
@@ -36,18 +36,18 @@ First, create a simple web app structure. For this guide, we'll use a basic HTML
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My First PWA</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="/manifest.json">
-</head>
-<body>
-  <h1>Welcome to My First PWA</h1>
-  <p>This is a simple Progressive Web App.</p>
-  <script src="app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My First PWA</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <h1>Welcome to My First PWA</h1>
+    <p>This is a simple Progressive Web App.</p>
+    <script src="app.js"></script>
+  </body>
 </html>
 ```
 
@@ -72,14 +72,19 @@ p {
 ### app.js
 
 ```javascript
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(registration => {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, error => {
-        console.log('ServiceWorker registration failed: ', error);
-      });
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js").then(
+      (registration) => {
+        console.log(
+          "ServiceWorker registration successful with scope: ",
+          registration.scope
+        );
+      },
+      (error) => {
+        console.log("ServiceWorker registration failed: ", error);
+      }
+    );
   });
 }
 ```
@@ -91,22 +96,17 @@ A service worker is a script that your browser runs in the background, separate 
 ### service-worker.js
 
 ```javascript
-self.addEventListener('install', event => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open('v1').then(cache => {
-      return cache.addAll([
-        '/',
-        '/index.html',
-        '/styles.css',
-        '/app.js'
-      ]);
+    caches.open("v1").then((cache) => {
+      return cache.addAll(["/", "/index.html", "/styles.css", "/app.js"]);
     })
   );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then(response => {
+    caches.match(event.request).then((response) => {
       return response || fetch(event.request);
     })
   );
@@ -118,20 +118,24 @@ In your app.js, register the service worker.
 ### app.js
 
 ```javascript
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(registration => {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, error => {
-        console.log('ServiceWorker registration failed: ', error);
-      });
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js").then(
+      (registration) => {
+        console.log(
+          "ServiceWorker registration successful with scope: ",
+          registration.scope
+        );
+      },
+      (error) => {
+        console.log("ServiceWorker registration failed: ", error);
+      }
+    );
   });
 }
 ```
 
->**Push Notifications:** PWAs can send push notifications to re-engage users.
->
+> **Push Notifications:** PWAs can send push notifications to re-engage users.
 
 ## Step 3: Adding a Web App Manifest
 
@@ -161,6 +165,7 @@ A web app manifest provides metadata about your app and allows users to install 
   ]
 }
 ```
+
 Link the manifest in your HTML file.
 
 ### index.html
@@ -168,18 +173,18 @@ Link the manifest in your HTML file.
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My First PWA</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="/manifest.json">
-</head>
-<body>
-  <h1>Welcome to My First PWA</h1>
-  <p>This is a simple Progressive Web App.</p>
-  <script src="app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My First PWA</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <h1>Welcome to My First PWA</h1>
+    <p>This is a simple Progressive Web App.</p>
+    <script src="app.js"></script>
+  </body>
 </html>
 ```
 
@@ -204,7 +209,6 @@ To test your PWA, you can use the "Live Server" extension in Visual Studio Code 
 
 Your app should be fully functional, and you should see the option to install it as a PWA.
 
-
 ## FAQ
 
 **Q: What browsers support PWAs?**
@@ -219,8 +223,7 @@ A: PWAs require HTTPS, ensuring that all data is transmitted securely.
 **Q: How do I distribute a PWA?**
 A: PWAs can be accessed via a URL and installed directly from the browser. They can also be published in app stores.
 
->**Automatic Updates:** Service workers update in the background, ensuring users always have the latest version.
->
+> **Automatic Updates:** Service workers update in the background, ensuring users always have the latest version.
 
 # Conclusion
 
@@ -235,18 +238,18 @@ Here are the complete versions of the files you'll need:
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My First PWA</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="manifest" href="/manifest.json">
-</head>
-<body>
-  <h1>Welcome to My First PWA</h1>
-  <p>This is a simple Progressive Web App.</p>
-  <script src="app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My First PWA</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="/manifest.json" />
+  </head>
+  <body>
+    <h1>Welcome to My First PWA</h1>
+    <p>This is a simple Progressive Web App.</p>
+    <script src="app.js"></script>
+  </body>
 </html>
 ```
 
@@ -271,14 +274,19 @@ p {
 ### app.js
 
 ```javascript
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(registration => {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, error => {
-        console.log('ServiceWorker registration failed: ', error);
-      });
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js").then(
+      (registration) => {
+        console.log(
+          "ServiceWorker registration successful with scope: ",
+          registration.scope
+        );
+      },
+      (error) => {
+        console.log("ServiceWorker registration failed: ", error);
+      }
+    );
   });
 }
 ```
@@ -286,22 +294,17 @@ if ('serviceWorker' in navigator) {
 ### service-worker.js
 
 ```javascript
-self.addEventListener('install', event => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open('v1').then(cache => {
-      return cache.addAll([
-        '/',
-        '/index.html',
-        '/styles.css',
-        '/app.js'
-      ]);
+    caches.open("v1").then((cache) => {
+      return cache.addAll(["/", "/index.html", "/styles.css", "/app.js"]);
     })
   );
 });
 
-self.addEventListener('fetch', event => {
+self.addEventListener("fetch", (event) => {
   event.respondWith(
-    caches.match(event.request).then(response => {
+    caches.match(event.request).then((response) => {
       return response || fetch(event.request);
     })
   );
@@ -333,5 +336,4 @@ self.addEventListener('fetch', event => {
 }
 ```
 
->**App-like Experience:** PWAs provide a full-screen experience and can be launched from the home screen without a browser.
->
+> **App-like Experience:** PWAs provide a full-screen experience and can be launched from the home screen without a browser.
