@@ -14,6 +14,7 @@ const siteMetadata = {
   twitter: 'https://twitter.com/hookerhillstudios',
   facebook: 'https://www.facebook.com/jared.hooker.89/',
   linkedin: 'https://www.linkedin.com/in/jaredhooker/',
+  youtube: 'https://youtube.com/@hookerhillstudios',
   locale: 'en-US',
 }
 
