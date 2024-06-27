@@ -16,7 +16,7 @@ const Header = () => {
     setClick(!click)
   }
   return (
-    <header className="w-full p-4  px-5 sm:px-10 flex items-center justify-between">
+    <header className="w-full p-4 px-5 sm:px-10 flex items-center justify-between">
       <Logo />
 
       <button className="inline-block sm:hidden z-50 mr-3" onClick={toggle} aria-label="Hamburger Menu">
