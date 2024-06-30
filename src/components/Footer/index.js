@@ -1,160 +1,26 @@
-"use client"
-import React, { useState } from "react"
-import { GithubIcon, LinkedinIcon, TwitterIcon } from "../Icons"
-import Link from "next/link"
-import siteMetadata from "@/src/utils/siteMetaData"
-import { db } from "@/firebase"
-import { collection, addDoc, Timestamp } from "firebase/firestore"
-import ReCAPTCHA from "react-google-recaptcha"
-
-async function sendEmail(data) {
-  try {
-    const response = await fetch("/api/mailing-list-welcome", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-
-    if (response.ok) {
-      console.log("Email sent successfully.")
-      return true
-    } else {
-      console.log("Error occurred while sending email.")
-      return false
-    }
-  } catch (error) {
-    console.error(error)
-    return false
-  }
-}
+import React from 'react'
 
 const Footer = () => {
-  const [email, setEmail] = useState("")
-  const [error, setError] = useState(null)
-  const [success, setSuccess] = useState(false)
-  const [captchaValue, setCaptchaValue] = useState(null)
-
-  const handleInputChange = (e) => {
-    setEmail(e.target.value)
-  }
-
-  const handleCaptchaChange = (value) => {
-    setCaptchaValue(value)
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
-    setSuccess(false);
-  
-    if (!email) {
-      setError("Email is required.");
-      return;
-    }
-  
-    if (!captchaValue) {
-      setError("Please complete the reCAPTCHA.");
-      return;
-    }
-  
-    const data = {
-      email: email, // Include the email in the data object
-      captcha: captchaValue,
-    };
-  
-    try {
-      // Add the email to your database
-      const docRef = await addDoc(collection(db, "blogEmails"), {
-        email: email,
-        timestamp: Timestamp.fromDate(new Date()),
-        subscribed: true,
-      });
-  
-      // Send the email with the provided data
-      const emailSent = await sendEmail(data);
-  
-      if (emailSent) {
-        setSuccess(true);
-        setEmail("");
-        setCaptchaValue(null);
-      } else {
-        setError("Error occurred while sending email.");
-      }
-    } catch (error) {
-      setError("Error adding email. Please try again.");
-    }
-  };
-  
-
   return (
-    <div className="mb-[96px]">
-      <footer className="mt-16 rounded-2xl bg-dark dark:bg-accentDark/90 m-2 sm:m-10 flex flex-col items-center text-light dark:text-dark">
-        <h2 className="mt-6 text-lg">Join my mailing list...</h2>
-        <form
-          onSubmit={handleSubmit}
-          className="mt-2 w-fit sm:min-w-[384px] flex items-stretch bg-light dark:bg-dark p-1 sm:p-2 rounded mx04"
-        >
-          <input
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={handleInputChange}
-            className="w-full bg-transparent pl-2 sm:pl-0 text-dark dark:text-light focus:border-dark focus:ring-0 border-0 border-b mr-2 pb-1"
-          />
-          <input
-            type="submit"
-            className="bg-dark text-light dark:text-dark dark:bg-light cursor-pointer font-medium rounded px-3 sm:px-5 py-1"
-          />
-        </form>
-        <ReCAPTCHA
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-          onChange={handleCaptchaChange}
-          className="mt-2 mb-2"
-        />
-        {error && <p className="text-red-500">{error}</p>}
-        {success && <p className="text-white font-bold">Email submitted successfully!</p>}
-        <div className="flex items-center mt-8">
-          <a
-            href={siteMetadata.linkedin}
-            className="inline-block w-6 h-6 mr-4"
-            aria-label="Reach out to me via LinkedIn"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <LinkedinIcon className="hover:scale-125 transition-all ease duration-200" />
+    <footer data-testid='footer' className="bg-neutral-50 mt-8 pb-36 border-t border-gray-800 flex-row p-4 self-center text-gray-800 xl:text-lg w-full flex justify-center items-center text-center">
+      <div className="flex flex-col pt-4 w-full justify-center items-center">
+        <div className="flex justify-center mb-4 ml-2 pt-6 space-x-4">
+          <a data-testid="linkedin" href="https://blog.hookerhillstudios.com/" target="_blank" rel="noopener noreferrer" className="text-4xl hover:text-emerald-600 hover:scale-110 duration-300 px-2">
+            <i className="fa fa-newspaper w-full text-center flex"></i>
           </a>
-          <a
-            href={siteMetadata.twitter}
-            className="inline-block w-6 h-6 mr-4"
-            aria-label="Reach out to me via Twitter"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <TwitterIcon className="hover:scale-125 transition-all ease duration-200" />
+          <a href="https://play.google.com/store/apps/dev?id=4957396816342892948&hl=en_US" target="_blank" rel="noopener noreferrer" className="text-4xl hover:text-emerald-600 hover:scale-110 duration-300 px-2">
+            <i className="fa-brands fa-google-play"></i>
           </a>
-          <a
-            href={siteMetadata.github}
-            className="inline-block w-6 h-6 mr-4 fill-light"
-            aria-label="Check my profile on Github"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <GithubIcon className="fill-light dark:fill-dark hover:scale-125 transition-all ease duration-200" />
+          <a data-testid="youtube" href="https://www.youtube.com/@hookerhillstudios" target="_blank" rel="noopener noreferrer" className="text-4xl hover:text-emerald-600 hover:scale-110 duration-300 px-2">
+            <i className="fab fa-youtube w-full text-center flex"></i>
           </a>
         </div>
-        <div className="w-full mt-8 md:mt-24 relative font-medium border-t border-solid border-light py-6 px-8 flex flex-col md:flex-row items-center justify-between">
-          <span className="text-center">&copy;2023 Hooker Hill Studios. All rights reserved.</span>
-          <div className="text-center">
-            Powered by{" "}
-            <a href="https://www.hookerhillstudios.com" className="underline" target="_blank">
-              Hooker Hill Studios
-            </a>
-          </div>
+        <div className="mt-4 text-sm sm:text-base text-gray-600">
+          <p>&copy; 2024 Hooker Hill Studios. All rights reserved.</p>
+          <p>Los Angeles, California | <a href="mailto:hookerhillstudios@gmail.com" className="hover:text-emerald-600 duration-300">hookerhillstudios@gmail.com</a></p>
         </div>
-      </footer>
-    </div>
+      </div>
+    </footer>
   )
 }
 
