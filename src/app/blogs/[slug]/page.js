@@ -101,7 +101,7 @@ export default function BlogPage({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <article>
-        <div className="mb-8 text-center relative w-full h-[70vh] bg-dark">
+        <div className="mb-8 pt-2 sm:pt-22 text-center relative w-full h-[70vh] bg-dark">
           <div className="w-full z-10 flex flex-col items-center justify-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <Tag
               name={blog.tags[0]}
