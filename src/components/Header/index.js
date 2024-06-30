@@ -24,8 +24,7 @@ const Header = () => {
 
   return (
     <header className="w-full fixed z-50  bg-neutral-50 p-3 px-5 flex items-center justify-between">
-
-      <Link href={"/"}>
+      <Link href={"https://www.hookerhillstudios.com"}>
         <img
           src="/images/Logo-Blue.png"
           alt="Logo"
@@ -52,10 +51,8 @@ const Header = () => {
               }}
             >&nbsp;</span>
           </div>
-
         </div>
       </button>
-
       <nav className=" w-max py-3 px-6 sm:px-8 border border-solid border-dark rounded-full font-medium capitalize  items-center flex sm:hidden
         fixed top-6 right-1/2 translate-x-1/2 bg-light/80 backdrop-blur-sm z-50
         transition-all ease duration-300
@@ -78,8 +75,6 @@ const Header = () => {
           }
         </button>
       </nav>
-
-
       <nav className="justify-evenly text-xl sm:text-2xl w-full flex-1 py-2 px-8  font-medium capitalize  items-center hidden sm:flex
          bg-neutral-50 backdrop-blur-sm z-50">
         <Link href="/" className="mr-2">Home</Link>
@@ -96,9 +91,7 @@ const Header = () => {
             }
           </button>
         </div>
-
       </nav>
-
     </header>
   )
 }
