@@ -1,9 +1,9 @@
 ---
 title: "How to Fix the Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object"
-description: "This error typically occurs when Next.js encounters an unexpected object instead of a valid component type during rendering. One common cause of this error is having { "type": "module" } in your package.json file."
+description: "This error typically occurs when Next.js encounters an unexpected object instead of a valid component type during rendering."
 image: "../../public/blogs/roman-synkevych-vXInUOv1n84-unsplash.jpg"
-publishedAt: "2024-07-03"
-updatedAt: "2024-07-03"
+publishedAt: "2024-07-3"
+updatedAt: "2024-07-3"
 author: "Jared Hooker"
 isPublished: true
 tags: 
@@ -18,7 +18,7 @@ When working with Next.js, you might encounter the following error message:
 Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: object.
 ```
 
-This error typically occurs when Next.js encounters an unexpected object instead of a valid component type during rendering. One common cause of this error is having { "type": "module" } in your package.json file. This setting is incompatible with Next.js's server-side rendering environment, which expects CommonJS modules (require syntax) rather than ES modules (import/export syntax).
+This error typically occurs when Next.js encounters an unexpected object instead of a valid component type during rendering. One common cause of this error is having `{ "type": "module" }` in your package.json file. This setting is incompatible with Next.js's server-side rendering environment, which expects CommonJS modules (require syntax) rather than ES modules (import/export syntax).
 
 >Created by Vercel: Next.js was developed by Vercel (formerly Zeit), a company known for its focus on serverless deployment and web development tools.
 >
@@ -104,7 +104,7 @@ Next.js offers features such as automatic code splitting, optimized image loadin
 
 **How does Next.js handle SEO?**
 
-Next.js provides built-in SEO optimization features such as automatic <head> tag management, customizable <title> and <meta> tags per page, and support for canonical URLs and structured data.
+Next.js provides built-in SEO optimization features such as automatic `<head>` tag management, customizable `<title>` and `<meta>` tags per page, and support for canonical URLs and structured data.
 
 **Can Next.js be used for both server-side rendering (SSR) and static site generation (SSG)?**
 
