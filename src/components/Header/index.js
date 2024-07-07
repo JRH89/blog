@@ -80,9 +80,12 @@ const Header = () => {
         <Link href="/" className="mr-2">Home</Link>
         <Link href="/about" className="mx-2">About</Link>
         <Link href="/contact" className="mx-2">Contact</Link>
+
+      </nav>
+      <nav className="hidden sm:flex">
         <div className="flex justify-end">
           <button onClick={() => setMode(mode === "light" ? "dark" : "light")}
-            className={cx("w-6 h-6 sm:w-10 sm:h-10 ease ml-2 flex items-center justify-center border rounded-full p-1 ", mode === "light" ? "bg-dark text-light" :
+            className={cx("w-6 h-6 sm:w-10 sm:h-10 ease ml-2 flex items-center justify-end w-full border rounded-full p-1 ", mode === "light" ? "bg-dark text-light" :
               "bg-light text-dark")}
             aria-label="theme-switcher"
           >
