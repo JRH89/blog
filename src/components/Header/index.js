@@ -26,7 +26,7 @@ const Header = () => {
     <header className="w-full fixed z-50  bg-neutral-50 p-3 px-5 flex items-center justify-between">
       <Link href={"https://www.hookerhillstudios.com"}>
         <img
-          src="/images/Logo-Blue.png"
+          src="/images/Logo-Grass-2.png"
           alt="Logo"
           className="h-10 hover:scale-95 duration-300 sm:h-12 lg:h-14 rounded-full shadow-black shadow-md"
         />
