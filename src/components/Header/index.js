@@ -80,7 +80,7 @@ const Header = () => {
         <Link href="/" className="mr-2">Home</Link>
         <Link href="/about" className="mx-2">About</Link>
         <Link href="/contact" className="mx-2">Contact</Link>
-
+        <Link href="https://www.paypal.com/ncp/payment/KUWG9HFVBYWHL" className="mx-2">Donate</Link>
       </nav>
       <nav className="hidden sm:flex">
         <div className="flex justify-end">
