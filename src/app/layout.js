@@ -7,6 +7,7 @@ import siteMetadata from "../utils/siteMetaData"
 import Script from "next/script"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import Popup from "../components/Home/LeadCapture"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -95,8 +96,9 @@ export default function RootLayout({ children }) {
   }`}
         </Script>
         <Header />
+        <Popup />
         {children}
-        <SpeedInsights/>
+        <SpeedInsights />
         <Footer />
         <Analytics />
       </body>
