@@ -7,7 +7,6 @@ import { allBlogs } from "contentlayer/generated"
 import { slug } from "github-slugger"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-
 import BannerAdTwo from "@/src/components/Ads/BannerAdTwo"
 
 
