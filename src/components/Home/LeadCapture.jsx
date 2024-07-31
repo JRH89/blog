@@ -20,7 +20,7 @@ function Popup() {
         if (!localStorage.getItem('doNotShowPopupAgain')) {
             const popupTimer = setTimeout(() => {
                 setShowPopup(true);
-            }, 5000);
+            }, 10000);
 
             return () => clearTimeout(popupTimer);
         } else {
