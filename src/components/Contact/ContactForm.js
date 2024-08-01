@@ -1,8 +1,8 @@
 "use client"
-import React, { useState } from 'react'
-import ReCAPTCHA from "react-google-recaptcha" // Import ReCAPTCHA
 
-async function sendEmail(data, captchaValue) {
+import React, { useState } from 'react'
+
+async function sendEmail(data) {
   try {
     const response = await fetch("/api/send-email", {
       method: "POST",
@@ -38,7 +38,6 @@ export default function ContactForm() {
 
   const [isLoading, setIsLoading] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
-  const [captchaValue, setCaptchaValue] = useState(null)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -48,18 +47,9 @@ export default function ContactForm() {
     })
   }
 
-  const handleCaptchaChange = (value) => {
-    setCaptchaValue(value)
-    setError(null) // Clear any existing error message when captcha is completed
-  }
-
   const handleSubmit = async (e) => {
-    e.preventDefault()
 
-    if (!captchaValue) {
-      setError("Please complete the reCAPTCHA.")
-      return
-    }
+    e.preventDefault()
 
     setIsLoading(true)
 
@@ -67,16 +57,14 @@ export default function ContactForm() {
       subject: `New project inquiry from ${formData.name}`,
       message: `Details: ${formData.details}\nPhone: ${formData.phone}`,
       email: formData.email,
-      captcha: captchaValue
     }
 
-    const emailSent = await sendEmail(emailData, captchaValue)
+    const emailSent = await sendEmail(emailData)
     setIsLoading(false)
     setShowMessage(emailSent)
 
     if (emailSent) {
       setFormData({ name: '', email: '', phone: '', details: '' })
-      setCaptchaValue(null)
       setSuccess(true)
     } else {
       setError("Failed to send email. Please try again.")
@@ -85,38 +73,34 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="mt-12 space-y-2 text-base xs:text-lg sm:text-xl font-medium leading-relaxed font-in">
-
       <input
         type="text"
         name="name"
-        placeholder="your name"
+        placeholder="name"
         value={formData.name}
         onChange={handleChange}
         className="border rounded-md  w-full focus:ring-0 p-2 placeholder:text-lg border-b border-gray focus:border-gray bg-transparent"
         required
         maxLength={80}
       />
-
       <input
         type="email"
         name="email"
-        placeholder="your@email"
+        placeholder="email"
         value={formData.email}
         onChange={handleChange}
         className="border rounded-md  w-full focus:ring-0 p-2 placeholder:text-lg border-b border-gray focus:border-gray bg-transparent"
         required
       />
-
       <input
         type="tel"
         name="phone"
-        placeholder="your phone"
+        placeholder="phone"
         value={formData.phone}
         onChange={handleChange}
         className="border rounded-md  w-full focus:ring-0 p-2 placeholder:text-lg border-b border-gray focus:border-gray bg-transparent"
         required
       />
-
       <textarea
         name="details"
         placeholder="message"
@@ -126,21 +110,14 @@ export default function ContactForm() {
         className="w-full border rounded-md  mx-0 focus:ring-0 placeholder:text-lg border-b border-gray p-2 focus:border-gray bg-transparent"
         required
       />
-
       {error && <p className="text-red-500">{error}</p>}
       <div className='flex mx-auto items-center flex-col'>
-        <ReCAPTCHA
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} // Use your reCAPTCHA site key
-          onChange={handleCaptchaChange}
-          className="mt-2 mb-2"
-        />
         <input
           type="submit"
           value="send"
           className="mt-1 font-medium inline-block capitalize text-lg sm:text-xl py-2 hover:scale-105 transition-all ease duration-200 sm:py-3 px-6 sm:px-8 border-2 border-solid border-dark dark:border-light rounded cursor-pointer"
         />
       </div>
-
       {isLoading && <p>Sending email...</p>}
       {showMessage && <p>Email sent successfully!</p>}
     </form>

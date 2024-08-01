@@ -3,16 +3,14 @@
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../../../firebase';
-import ReCAPTCHA from "react-google-recaptcha";
 import DOMPurify from 'dompurify';
 import LottieAnimation from '../Contact/LottieAnimation';
 
 function Popup() {
-    const [name, setName] = useState('');
+
     const [email, setEmail] = useState('');
     const [showPopup, setShowPopup] = useState(false);
     const [submitted, setSubmitted] = useState(false);
-    const [recaptchaToken, setRecaptchaToken] = useState('');
     const [doNotShowAgain, setDoNotShowAgain] = useState(false);
 
     useEffect(() => {
@@ -30,27 +28,21 @@ function Popup() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!recaptchaToken) {
-            alert('Please complete the ReCAPTCHA.');
-            return;
-        }
 
         try {
             const sanitizedEmail = DOMPurify.sanitize(email);
             const docRef = await addDoc(collection(db, 'blogEmails'), {
-                name,
                 email: sanitizedEmail,
                 timestamp: new Date(),
                 subscribed: true,
             });
-            // Set flag in local storage to prevent popup from appearing again
+
             localStorage.setItem('popupClosed', 'true');
 
             localStorage.setItem('doNotShowPopupAgain', 'true');
 
-            setSubmitted(true); // Set submission status to true
+            setSubmitted(true);
 
-            // Send additional email via API
             const response = await fetch("/api/otherEmail", {
                 method: "POST",
                 body: JSON.stringify({ recipients: [email] }),
@@ -70,7 +62,6 @@ function Popup() {
             }, 3000);
         } catch (error) {
             console.error('Error adding lead or sending email: ', error);
-            // Handle error, like showing an error message to the user
         }
     };
 
@@ -79,10 +70,6 @@ function Popup() {
         if (doNotShowAgain) {
             localStorage.setItem('doNotShowPopupAgain', 'true');
         }
-    };
-
-    const handleRecaptchaChange = (token) => {
-        setRecaptchaToken(token);
     };
 
     const handleDoNotShowAgainChange = () => {
@@ -105,14 +92,7 @@ function Popup() {
                         <div className="text-center text-green-600 font-semibold mb-4">Thank you for joining the list!</div>
                     ) : (
                         <form onSubmit={handleSubmit} className="flex flex-col space-y-2">
-                            <input className="rounded border bg-gray-100 p-2" type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
                             <input className="rounded border bg-gray-100 p-2" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                            <div className="py-2 my-4 max-w-xs w-auto text-xs mx-auto px-6 flex flex-col items-center justify-center">
-                                <ReCAPTCHA
-                                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                                    onChange={handleRecaptchaChange}
-                                />
-                            </div>
                             <div className="flex justify-end pt-2">
                                 <input
                                     id="doNotShowAgain"
