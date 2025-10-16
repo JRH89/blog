@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     // Retrieve email address from the request body
     const { email } = req.body;
 
-    sgMail.setApiKey("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");
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
     const msg = {
       to: email, // Use the email address retrieved from the request body
